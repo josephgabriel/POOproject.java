@@ -1,3 +1,6 @@
+**Saudações**
+Esse projeto é referente a N2 da Disciplina de Programação Orientada a objeto (POO)
+
 **EQUIPE**
 1. Alana
 2. Antonio Vinicius
