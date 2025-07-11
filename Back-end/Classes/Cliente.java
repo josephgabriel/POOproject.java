@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Cliente {
-    private int id[];
+    private int id[]; // isso não é so um vetor, tenho de arrumar depois para ser um sistema dinamico com capacidade flexivel de criação de contas
     private String nome;
     private String email;
     private String endereco;
@@ -135,5 +135,31 @@ public class Cliente {
        }
        sc.close();
    }
+   
+   public void clienteDeletar(){
+       System.out.println("Tem Certeza que deseja apagar o Cliente " + this.id + "? 1 - Sim  2 - Não");
+       int opcao;
+       Scanner sc = new Scanner(System.in);
+       
+       opcao = sc.nextInt();
+       
+       switch(opcao){
+           case 1: 
+               //falta adicionar um comando que atualize os id anteriores e posteriores
+               this.nome = null;
+               this.email = null;
+               this.endereco = null;
+               this.telefone = null;
+               this.situacao = null;
+               System.out.println("Usuário deletado com Sucesso!");
+               break;
+               
+           case 2: 
+               break;
+               
+           default: System.out.println("Opção inválida! Tente novamente!"); break; //novamente, arrumar o break
+       }
+   }
+   
     //em andamento...
 }
