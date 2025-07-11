@@ -11,4 +11,4 @@ Esse projeto é referente a N2 da Disciplina de Programação Orientada a objeto
 7. José Gabriel
 8. David Lucas
 9. Vinicius Rolim
-10. Marcos Vinicius
+
