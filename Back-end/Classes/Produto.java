@@ -1,6 +1,6 @@
 // Classe para representar um produto do sistema Netshoe
 public class Produto {
-    // Atributos privados do produto
+    // Atributos privados do produto (encapsulamento)
     private int id;
     private String nome;
     private double preco;
@@ -14,13 +14,13 @@ public class Produto {
         this.estoque = estoque;
     }
 
-    // leitura dos atributos
+    // leitura dos atributos com get
     public int getId() { return id; }
     public String getNome() { return nome; }
     public double getPreco() { return preco; }
     public int getEstoque() { return estoque; }
 
-    // Métodos de modificação para alterar atributos
+    // Métodos de modificação para alterar atributos com set
     public void setNome(String nome) { this.nome = nome; }
     public void setPreco(double preco) { this.preco = preco; }
     public void setEstoque(int estoque) { this.estoque = estoque; }
