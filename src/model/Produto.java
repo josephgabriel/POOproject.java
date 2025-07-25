@@ -1,4 +1,6 @@
 // Classe para representar um produto do sistema Netshoe
+package model;
+
 public class Produto {
     // Atributos privados do produto (encapsulamento)
     private int id;
