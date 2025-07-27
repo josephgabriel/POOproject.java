@@ -1,42 +1,21 @@
-import java.math.BigDecimal;
+package classes;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Venda{
-
-    private long id;
+public class Venda {
+    private int id;
     private Cliente cliente;
-    private List<ItemVenda> itens = new ArrayList<>();// vou criar dps uma lista de item, pq agora só está calculando 1 produto só
-    private double quantidadeTotal;
-    private BigDecimal valor;
-    private BigDecimal valorPago;
-    private BigDecimal troco;
-    private Date dataVenda = new Date();
-    private boolean aprovada;
+    private Timestamp dataVenda;
+    private List<ItemVenda> itens = new ArrayList<>();
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public List<ItemVenda> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<ItemVenda> itens) {
-        this.itens = itens;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
     }
 
     public Cliente getCliente() {
@@ -47,53 +26,19 @@ public class Venda{
         this.cliente = cliente;
     }
 
-    public double getQuantidadeTotal() {
-        return quantidadeTotal;
-    }
-
-    public void setQuantidadeTotal(double quantidadeTotal) {
-        this.quantidadeTotal = quantidadeTotal;
-    }
-
-    public BigDecimal getvalor() {
-        return valor;
-    }
-
-    public void setvalor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public BigDecimal getValorPago() {
-        return valorPago;
-    }
-
-    public void setValorPago(BigDecimal valorPago) {
-        this.valorPago = valorPago;
-    }
-
-    public BigDecimal getTroco() {
-        return troco;
-    }
-
-    public void setTroco(BigDecimal troco) {
-        this.troco = troco;
-    }
-
-    public Date getDataVenda() {
+    public Timestamp getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(Date dataVenda) {
+    public void setDataVenda(Timestamp dataVenda) {
         this.dataVenda = dataVenda;
     }
 
-    public boolean isAprovada() {
-        return aprovada;
+    public List<ItemVenda> getItens() {
+        return itens;
     }
 
-    public void setAprovada(boolean aprovada) {
-        this.aprovada = aprovada;
+    public double getValorTotal() {
+        return itens.stream().mapToDouble(i -> i.getPrecoUnitario() * i.getQuantidade()).sum();
     }
-
-  // ainda falta implementar os metodos
 }
