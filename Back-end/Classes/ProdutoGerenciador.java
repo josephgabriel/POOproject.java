@@ -1,26 +1,20 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoGerenciador {
-    // Lista para armazenar todos os produtos cadastrados
-    private List<Produto> produtos = new ArrayList<>();
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    // Variável para controla o próximo ID a ser atribuído automaticamente
-    private int proximoId = 1;
-
-     //metodos para as funcionalidades que o professor especificou
-  
-    // inserir um novo produto na lista
+    // Inserir novo produto
     public void inserirProduto(String nome, double preco, int estoque) {
-        Produto novo = new Produto(proximoId++, nome, preco, estoque);
-        produtos.add(novo);
-        System.out.println("Produto inserido com sucesso!");
+        Produto novo = new Produto(0, nome, preco, estoque); // ID será gerado no banco
+        produtoDAO.inserir(novo);
+        System.out.println("Produto inserido com sucesso no banco!");
     }
 
-    // listar todos os produtos cadastrados
+    // Listar todos os produtos do banco
     public void listarProdutos() {
+        List<Produto> produtos = produtoDAO.listarTodos();
         if (produtos.isEmpty()) {
-            System.out.println("Nenhum produto cadastrado.");
+            System.out.println("Nenhum produto cadastrado no banco.");
         } else {
             for (Produto p : produtos) {
                 System.out.println(p);
@@ -28,66 +22,62 @@ public class ProdutoGerenciador {
         }
     }
 
-    // atualizar os dados de um produto específico
+    // Atualizar produto
     public void atualizarProduto(int id, String novoNome, double novoPreco, int novoEstoque) {
-        Produto produto = encontrarProdutoPorId(id);
+        Produto produto = produtoDAO.buscarPorId(id);
         if (produto != null) {
             produto.setNome(novoNome);
             produto.setPreco(novoPreco);
             produto.setEstoque(novoEstoque);
+            produtoDAO.atualizar(produto);
             System.out.println("Produto atualizado com sucesso!");
         } else {
-            System.out.println("Produto não foi localizado!");
+            System.out.println("Produto não foi localizado no banco!");
         }
     }
 
-    // remover um produto da lista utilizando o ID
+    // Remover produto
     public void removerProduto(int id) {
-        Produto produto = encontrarProdutoPorId(id);
+        Produto produto = produtoDAO.buscarPorId(id);
         if (produto != null) {
-            produtos.remove(produto);
-            System.out.println("Produto removido com sucesso.");
+            produtoDAO.deletar(id);
+            System.out.println("Produto removido com sucesso do banco.");
         } else {
-            System.out.println("Produto não encontrado.");
+            System.out.println("Produto não encontrado no banco.");
         }
     }
 
-    // buscar produtos que contenham parte do nome informado
+    // Buscar por nome (parcial)
     public void consultarPorNome(String nome) {
+        List<Produto> produtos = produtoDAO.listarTodos();
         boolean encontrado = false;
+
         for (Produto p : produtos) {
             if (p.getNome().toLowerCase().contains(nome.toLowerCase())) {
                 System.out.println(p);
                 encontrado = true;
             }
         }
+
         if (!encontrado) {
             System.out.println("Nenhum produto encontrado com esse nome!");
         }
     }
 
-    // buscar produtos dentro de uma faixa de preço
+    // Buscar por faixa de preço
     public void consultarPorFaixaDePreco(double precoMin, double precoMax) {
+        List<Produto> produtos = produtoDAO.listarTodos();
         boolean encontrado = false;
+
         for (Produto p : produtos) {
             if (p.getPreco() >= precoMin && p.getPreco() <= precoMax) {
                 System.out.println(p);
                 encontrado = true;
             }
         }
+
         if (!encontrado) {
             System.out.println("Nenhum produto na faixa de preço especificada!");
         }
     }
-
-    // Método privado para encontrar um produto pelo ID
-    private Produto encontrarProdutoPorId(int id) {
-        for (Produto p : produtos) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
 }
-
