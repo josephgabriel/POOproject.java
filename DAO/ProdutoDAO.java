@@ -5,17 +5,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDAO {
-
-    // Dados de conexão com o banco SQL Server
-    private final String url = "jdbc:sqlserver://localhost:1433;databaseName=SeuBanco";
-    private final String user = "seuUsuario";
-    private final String password = "suaSenha";
-
-    private Connection conectar() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
-    }
-
+public class ProdutoDAO extends ConexãoBD {
+    
     // Inserir novo produto
     public void inserir(Produto produto) {
         String sql = "INSERT INTO tbProdutos (nome, preco, estoque) VALUES (?, ?, ?)";
