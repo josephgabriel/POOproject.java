@@ -1,4 +1,6 @@
-  public class Cliente { //Arrumei a classe cliente para ser Condizente com o DAO
+package classes;
+
+public class Cliente {
     private int id;
     private String nome;
     private String email;
@@ -14,18 +16,15 @@
         this.situacao = true;
     }
 
-    public Cliente(int id, String nome, String email, String endereco, String telefone, boolean situacao) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.situacao = situacao;
+    public Cliente() {
     }
 
-   
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) { //Achei que nao precisava, ja que o id(codigo) é auto icremento, mas dps vi que precisa
+        this.id = id;
     }
 
     public String getNome() {
