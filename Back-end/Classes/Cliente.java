@@ -6,14 +6,12 @@ public class Cliente {
     private String email;
     private String endereco;
     private String telefone;
-    private boolean situacao;
 
     public Cliente(String nome, String email, String endereco, String telefone) {
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.situacao = true;
     }
 
     public Cliente() {
@@ -23,7 +21,7 @@ public class Cliente {
         return id;
     }
 
-    public void setId(int id) { //Achei que nao precisava, ja que o id(codigo) é auto icremento, mas dps vi que precisa
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,10 +41,6 @@ public class Cliente {
         return telefone;
     }
 
-    public boolean isSituacao() {
-        return situacao;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -62,18 +56,13 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    public void setSituacao(boolean situacao) {
-        this.situacao = situacao;
-    }
-
+    
     @Override
     public String toString() {
         return "Cliente ID: " + id + "\n" +
                "Nome: " + nome + "\n" +
                "Email: " + email + "\n" +
                "Endereço: " + endereco + "\n" +
-               "Telefone: " + telefone + "\n" +
-               "Situação: " + (situacao ? "Ativa" : "Inativa");
+               "Telefone: " + telefone + "\n";
     }
 }
