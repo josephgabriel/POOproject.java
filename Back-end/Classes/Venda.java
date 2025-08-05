@@ -1,45 +1,44 @@
 package classes;
 
-public class ItemVenda {
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Venda {
     private int id;
-    private Produto produto;
-    private Venda venda;
-    private int quantidade;
-    private double precoUnitario;
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
+    private Cliente cliente;
+    private Timestamp dataVenda;
+    private List<ItemVenda> itens = new ArrayList<>();
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Timestamp getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(Timestamp dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+
+    public double getValorTotal() {
+        return itens.stream().mapToDouble(i -> i.getPrecoUnitario() * i.getQuantidade()).sum();
     }
 }
