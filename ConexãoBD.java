@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class ConexãoBD {
-    private static String sqlUrl = "jdbc:sqlserver://GustavoRV;Database=BDUrbanShoes;IntegratedSecurity=true;" + "encrypt=true;trustServerCertificate=true" ;
+    protected static String sqlUrl = "jdbc:sqlserver://GustavoRV;Database=BDUrbanShoes;IntegratedSecurity=true;" + "encrypt=true;trustServerCertificate=true" ;
 
     public int atualizarTabela(String sql){ //recebe uma string com um código de SQL, e serve tanto para adicionar dados no banco de dados, quanto para modificar os dados
         try(Connection con = DriverManager.getConnection(sqlUrl)){ //conexão
