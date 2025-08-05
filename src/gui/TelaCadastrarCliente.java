@@ -112,20 +112,16 @@ public class TelaCadastrarCliente extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NomeClienteActionPerformed
-
     private void btnSalvarClienteCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteCadastroActionPerformed
         // TODO add your handling code here:
         try{
             ClienteDAO clienteDAO = new ClienteDAO();
-            
+
             String nome = NomeCliente.getText();
             String email = EmailCliente.getText();
             String endereco = EnderecoCliente.getText();
             String telefone = TelefoneCliente.getText();
-            
+
             if(nome == null || nome.isEmpty() || email == null || email.isEmpty() || endereco == null || endereco.isEmpty() || telefone == null || telefone.isEmpty()){
                 JOptionPane.showInternalMessageDialog(null, "Algum dado está vazio\nCliente não salvo");
             }
@@ -139,6 +135,10 @@ public class TelaCadastrarCliente extends javax.swing.JPanel {
             JOptionPane.showInternalMessageDialog(null, "O SEGUINTE ERRO OCORREU: " + e);
         }
     }//GEN-LAST:event_btnSalvarClienteCadastroActionPerformed
+
+    private void NomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomeClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
