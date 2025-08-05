@@ -6,6 +6,7 @@ import classes.ItemVenda;
 import classes.Produto;
 import classes.Venda;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +14,26 @@ import java.util.List;
 public class VendaDAO extends ConexãoBD {
 
     public void salvarVenda(Venda venda) {
-        String sqlUrl = "INSERT INTO tbVendas (CLI_CODIGO, VEN_DATA) VALUES (?, ?)";
+        String sql = "INSERT INTO tbVendas (CLI_CODIGO, VEN_DATA) VALUES (?, ?)";
 
-        try (PreparedStatement ps = (PreparedStatement)DriverManager.getConnection(sqlUrl)){
+        try (Connection con = DriverManager.getConnection(sqlUrl)){
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, venda.getCliente().getId()); // falta criar o getid do cliente
             ps.setTimestamp(2, venda.getDataVenda());
             ps.executeUpdate();
+            try(ResultSet rs = ps.getGeneratedKeys()){
+                if(rs.next()){
+                    venda.setId(rs.getInt(1));
 
+                }
+            }
+            /*
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 venda.setId(rs.getInt(1));
             }
+             */
+
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar venda", e);
         }
@@ -32,7 +42,7 @@ public class VendaDAO extends ConexãoBD {
     public List<Venda> listarVendasCompletas() {
         List<Venda> lista = new ArrayList<>();
 
-        String sqlUrl = """
+        String sql = """
         SELECT 
             v.VEN_CODIGO, v.VEN_DATA,
             c.CLI_CODIGO, c.CLI_NOME, c.CLI_EMAIL, c.CLI_ENDERECO, c.CLI_TELEFONE,
@@ -44,8 +54,9 @@ public class VendaDAO extends ConexãoBD {
         INNER JOIN tbProdutos p ON iv.PRO_CODIGO = p.PRO_CODIGO
         """;
 
-        try (PreparedStatement ps = (PreparedStatement) DriverManager.getConnection(sqlUrl);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection con = DriverManager.getConnection(sqlUrl)){
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 // ainda falta os gettes e settes da classe cliente
