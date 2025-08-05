@@ -1,5 +1,9 @@
 package gui;
 
+import DAO.ClienteDAO;
+import javax.swing.JOptionPane;
+import model.Cliente;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -54,6 +58,11 @@ public class TelaCadastrarCliente extends javax.swing.JPanel {
         });
 
         btnSalvarClienteCadastro.setText("Salvar");
+        btnSalvarClienteCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarClienteCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -106,6 +115,30 @@ public class TelaCadastrarCliente extends javax.swing.JPanel {
     private void NomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NomeClienteActionPerformed
+
+    private void btnSalvarClienteCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteCadastroActionPerformed
+        // TODO add your handling code here:
+        try{
+            ClienteDAO clienteDAO = new ClienteDAO();
+            
+            String nome = NomeCliente.getText();
+            String email = EmailCliente.getText();
+            String endereco = EnderecoCliente.getText();
+            String telefone = TelefoneCliente.getText();
+            
+            if(nome == null || nome.isEmpty() || email == null || email.isEmpty() || endereco == null || endereco.isEmpty() || telefone == null || telefone.isEmpty()){
+                JOptionPane.showInternalMessageDialog(null, "Algum dado está vazio\nCliente não salvo");
+            }
+            else{
+                Cliente cliente = new Cliente(nome, email, endereco, telefone);
+                clienteDAO.adicionarCliente(cliente);
+                JOptionPane.showInternalMessageDialog(null, "O cliente " + cliente.getNome() + " foi salvo com sucesso");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "O SEGUINTE ERRO OCORREU: " + e);
+        }
+    }//GEN-LAST:event_btnSalvarClienteCadastroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
