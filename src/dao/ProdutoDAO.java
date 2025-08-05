@@ -1,17 +1,18 @@
 package DAO;
 
-import Conexão.ConexãoBD;
+import factory.ConexaoBD;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.Produto;
 
-public class ProdutoDAO extends ConexãoBD {
+public class ProdutoDAO extends ConexaoBD {
     
     // Inserir novo produto
     public void inserir(Produto produto) {
         String sql = "INSERT INTO tbProdutos (nome, preco, estoque) VALUES (?, ?, ?)";
 
-        try (Connection conn = conectar();
+        try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNome());
@@ -28,7 +29,7 @@ public class ProdutoDAO extends ConexãoBD {
     public void atualizar(Produto produto) {
         String sql = "UPDATE tbProdutos SET nome = ?, preco = ?, estoque = ? WHERE id = ?";
 
-        try (Connection conn = conectar();
+        try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNome());
@@ -46,7 +47,7 @@ public class ProdutoDAO extends ConexãoBD {
     public void deletar(int id) {
         String sql = "DELETE FROM tbProdutos WHERE id = ?";
 
-        try (Connection conn = conectar();
+        try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -62,7 +63,7 @@ public class ProdutoDAO extends ConexãoBD {
         String sql = "SELECT * FROM tbProdutos WHERE id = ?";
         Produto produto = null;
 
-        try (Connection conn = conectar();
+        try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -72,6 +73,7 @@ public class ProdutoDAO extends ConexãoBD {
                 produto = new Produto(
                     rs.getInt("id"),
                     rs.getString("nome"),
+                    rs.getString("descricao"),
                     rs.getDouble("preco"),
                     rs.getInt("estoque")
                 );
@@ -89,7 +91,7 @@ public class ProdutoDAO extends ConexãoBD {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM tbProdutos";
 
-        try (Connection conn = conectar();
+        try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -97,6 +99,7 @@ public class ProdutoDAO extends ConexãoBD {
                 Produto p = new Produto(
                     rs.getInt("id"),
                     rs.getString("nome"),
+                    rs.getString("descricao"),
                     rs.getDouble("preco"),
                     rs.getInt("estoque")
                 );

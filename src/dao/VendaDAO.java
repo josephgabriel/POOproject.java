@@ -1,16 +1,16 @@
-package DAO;
+package dao;
 
-import Conexão.ConexãoBD;
-import classes.Cliente;
-import classes.ItemVenda;
-import classes.Produto;
-import classes.Venda;
+import factory.ConexaoBD;
+import model.Cliente;
+import model.ItemVenda;
+import model.Produto;
+import model.Venda;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VendaDAO extends ConexãoBD {
+public class VendaDAO extends ConexaoBD {
 
     public void salvarVenda(Venda venda) {
         String sqlUrl = "INSERT INTO tbVendas (CLI_CODIGO, VEN_DATA) VALUES (?, ?)";

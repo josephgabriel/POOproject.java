@@ -1,4 +1,6 @@
-  public class Cliente { //Arrumei a classe cliente para ser Condizente com o DAO
+package model;
+
+public class Cliente { //Arrumei a classe cliente para ser Condizente com o DAO
     private int id;
     private String nome;
     private String email;
@@ -23,6 +25,7 @@
         this.situacao = situacao;
     }
 
+    public Cliente() { };
    
     public int getId() {
         return id;
@@ -46,6 +49,10 @@
 
     public boolean isSituacao() {
         return situacao;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     public void setNome(String nome) {

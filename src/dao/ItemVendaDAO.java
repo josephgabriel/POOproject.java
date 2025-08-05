@@ -1,13 +1,13 @@
-package DAO;
+package dao;
 
-import Conexão.ConexãoBD;
-import classes.ItemVenda;
+import factory.ConexaoBD;
+import model.ItemVenda;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ItemVendaDAO extends ConexãoBD {
+public class ItemVendaDAO extends ConexaoBD {
     public void salvar(ItemVenda itemVenda){
         try{
             String sqlUrl = "INSERT INTO tbItensVenda (IVE_CODIGO, VEN_CODIGO, PRO_CODIGO,IVE_QTDE, IVE_PRECO_UNIT) VALUES(?,?,?,?,?)";

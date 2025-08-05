@@ -1,9 +1,7 @@
 package gui;
 
-import dao.ProdutoDAO;
 import java.awt.BorderLayout;
 import java.util.List;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -24,9 +22,6 @@ public class TelaCadastrarProduto extends javax.swing.JPanel {
      * Creates new form TelaCadastrarProduto
      */
 
-	private JTable tabela;
-        private ProdutoDAO dao = new ProdutoDAO();
-	
     public TelaCadastrarProduto() {
         initComponents();
     }
