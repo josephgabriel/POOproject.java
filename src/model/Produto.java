@@ -23,6 +23,7 @@ public class Produto {
     // leitura dos atributos com get
     public int getId() { return id; }
     public String getNome() { return nome; }
+    public String getDescricao() { return descricao; }
     public double getPreco() { return preco; }
     public int getEstoque() { return estoque; }
 

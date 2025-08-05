@@ -1,5 +1,9 @@
 package gui;
 
+import DAO.ProdutoDAO;
+import javax.swing.JOptionPane;
+import model.Produto;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -27,10 +31,13 @@ public class TelaEditarProduto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnSalvarProdutoEdicao = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         NomeProdutoEditar = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         btnExcluirProdutoEdicao = new javax.swing.JButton();
         NovoPrecoProduto = new javax.swing.JTextField();
         NovoEstoqueProduto = new javax.swing.JTextField();
@@ -41,10 +48,20 @@ public class TelaEditarProduto extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         NovoNomeProduto = new javax.swing.JTextField();
+        btnBuscarProduto = new javax.swing.JButton();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setBackground(new java.awt.Color(153, 153, 153));
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+
         btnSalvarProdutoEdicao.setText("Salvar");
+        btnSalvarProdutoEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarProdutoEdicaoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Digite o produto a ser editado:");
@@ -58,6 +75,11 @@ public class TelaEditarProduto extends javax.swing.JPanel {
         btnExcluirProdutoEdicao.setBackground(new java.awt.Color(255, 51, 51));
         btnExcluirProdutoEdicao.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluirProdutoEdicao.setText("Excluir ");
+        btnExcluirProdutoEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirProdutoEdicaoActionPerformed(evt);
+            }
+        });
 
         NovaDescricaoProduto.setColumns(20);
         NovaDescricaoProduto.setRows(5);
@@ -71,57 +93,67 @@ public class TelaEditarProduto extends javax.swing.JPanel {
 
         jLabel4.setText("Descrição:");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        btnBuscarProduto.setText("Buscar");
+        btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProdutoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(132, 132, 132)
                 .addComponent(btnSalvarProdutoEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(NovoEstoqueProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluirProdutoEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(132, 132, 132)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(NovoPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addGap(128, 128, 128)))
                         .addGap(106, 106, 106))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(NomeProdutoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(164, 164, 164))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NovoNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(NovoNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(NomeProdutoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscarProduto)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NomeProdutoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomeProdutoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarProduto))
+                .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NovoNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,24 +162,154 @@ public class TelaEditarProduto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NovoPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NovoEstoqueProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarProdutoEdicao)
                     .addComponent(btnExcluirProdutoEdicao))
                 .addGap(31, 31, 31))
         );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(431, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(106, 106, 106))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jLabel1)
+                .addContainerGap(269, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvarProdutoEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoEdicaoActionPerformed
+        // TODO add your handling code here:
+        try{
+            ProdutoDAO pDAO = new ProdutoDAO();
+            Produto p = pDAO.buscarPorNome(NomeProdutoEditar.getText()).getFirst();
+            String nome = NovoNomeProduto.getText();
+            String descricao = NovaDescricaoProduto.getText();
+
+            try{
+                double preco = Double.parseDouble(NovoPrecoProduto.getText());
+                int estoque = Integer.parseInt(NovoEstoqueProduto.getText());
+
+                if(nome == null || nome.isEmpty() || descricao == null || descricao.isEmpty() || preco < 0.01 || estoque < 0){
+                    JOptionPane.showInternalMessageDialog(null, "Algum dado está vazio ou é invalido\nProduto não salvo");
+                }
+                else{
+                    Produto produto = new Produto(p.getId(), nome, descricao, preco, estoque);
+                    pDAO.atualizar(produto);
+                    JOptionPane.showInternalMessageDialog(null, "O produto " + produto.getNome() + " foi salvo com sucesso");
+                }
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Preço ou Estoque estão em formato invalido");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "O SEGUINTE ERRO OCORREU: " + e);
+        }
+    }//GEN-LAST:event_btnSalvarProdutoEdicaoActionPerformed
 
     private void NomeProdutoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeProdutoEditarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NomeProdutoEditarActionPerformed
+
+    private void btnExcluirProdutoEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoEdicaoActionPerformed
+        // TODO add your handling code here:
+        try{
+            ProdutoDAO pDAO = new ProdutoDAO();
+            
+            double preco = Double.parseDouble(NovoPrecoProduto.getText());
+            int estoque = Integer.parseInt(NovoEstoqueProduto.getText());
+
+            if("".equals(NovoNomeProduto.getText()) || "".equals(NovaDescricaoProduto.getText()) || "".equals(NovoEstoqueProduto.getText()) || "".equals(NovoPrecoProduto.getText())){
+                JOptionPane.showInternalMessageDialog(null, "Preencha todos os dados corretamente");
+            }
+            else{
+                Produto produto = pDAO.buscarPorNome(NomeProdutoEditar.getText()).getFirst();
+
+                pDAO.deletar(produto.getId());
+                JOptionPane.showInternalMessageDialog(null, "Produto excluido com sucesso");
+                NovoNomeProduto.setText("");
+                NovaDescricaoProduto.setText("");
+                NovoPrecoProduto.setText("");
+                NovoEstoqueProduto.setText("");
+            }
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Preço ou Estoque estão em formato invalido");
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+        }
+    }//GEN-LAST:event_btnExcluirProdutoEdicaoActionPerformed
+
+    private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
+        // TODO add your handling code here:
+        try{
+            ProdutoDAO pDAO = new ProdutoDAO();
+            Produto produto = pDAO.buscarPorNome(NomeProdutoEditar.getText()).getFirst();
+
+            if(produto.getId() == 0){
+                JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+                NovoNomeProduto.setText("");
+                NovaDescricaoProduto.setText("");
+                NovoPrecoProduto.setText("");
+                NovoEstoqueProduto.setText("");
+            }
+            else{
+                NovoNomeProduto.setText(produto.getNome());
+                NovaDescricaoProduto.setText(produto.getDescricao());
+                NovoPrecoProduto.setText(Double.toString(produto.getPreco()));
+                NovoEstoqueProduto.setText(String.valueOf(produto.getEstoque()));
+            }
+        }
+        catch(java.lang.NullPointerException e){
+            JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+            NovoNomeProduto.setText("");
+            NovaDescricaoProduto.setText("");
+            NovoPrecoProduto.setText("");
+            NovoEstoqueProduto.setText("");
+        }
+        catch(java.util.NoSuchElementException e){
+            JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+            NovoNomeProduto.setText("");
+            NovaDescricaoProduto.setText("");
+            NovoPrecoProduto.setText("");
+            NovoEstoqueProduto.setText("");
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+            NovoNomeProduto.setText("");
+            NovaDescricaoProduto.setText("");
+            NovoPrecoProduto.setText("");
+            NovoEstoqueProduto.setText("");
+        }
+    }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,6 +318,7 @@ public class TelaEditarProduto extends javax.swing.JPanel {
     private javax.swing.JTextField NovoEstoqueProduto;
     private javax.swing.JTextField NovoNomeProduto;
     private javax.swing.JTextField NovoPrecoProduto;
+    private javax.swing.JButton btnBuscarProduto;
     private javax.swing.JButton btnExcluirProdutoEdicao;
     private javax.swing.JButton btnSalvarProdutoEdicao;
     private javax.swing.JLabel jLabel1;
@@ -164,6 +327,9 @@ public class TelaEditarProduto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

@@ -112,4 +112,29 @@ public class ProdutoDAO extends ConexaoBD {
 
         return produtos;
     }
+    
+        public List<Produto> buscarPorNome(String nome) {
+        List<Produto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM tbProdutos WHERE PRO_NOME = ?";
+
+        try (Connection conn = ConexaoBD.createConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("PRO_ID"));
+                produto.setNome(rs.getString("PRO_NOME"));
+                produto.setDescricao(rs.getString("PRO_DESCRICAO"));
+                produto.setPreco(rs.getDouble("PRO_PRECO"));
+                produto.setEstoque(rs.getInt("PRO_ESTOQUE"));
+                lista.add(produto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar clientes", e);
+        }
+
+        return lista;
+    }
 }
