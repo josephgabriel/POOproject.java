@@ -1,5 +1,9 @@
 package gui;
 
+import DAO.ClienteDAO;
+import javax.swing.JOptionPane;
+import model.Cliente;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -27,6 +31,7 @@ public class TelaEditarCliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         NovoTelefoneCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -39,9 +44,13 @@ public class TelaEditarCliente extends javax.swing.JPanel {
         NomeClienteEditar = new javax.swing.JTextField();
         btnSalvarClienteEdicao = new javax.swing.JButton();
         btnExcluirClienteEdicao = new javax.swing.JButton();
+        btnBuscarCliente = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setPreferredSize(new java.awt.Dimension(537, 420));
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setPreferredSize(new java.awt.Dimension(537, 420));
 
         jLabel2.setText("Nome:");
 
@@ -61,47 +70,70 @@ public class TelaEditarCliente extends javax.swing.JPanel {
         jLabel1.setText("Digite o Cliente a ser Editado:");
 
         btnSalvarClienteEdicao.setText("Salvar");
+        btnSalvarClienteEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarClienteEdicaoActionPerformed(evt);
+            }
+        });
 
         btnExcluirClienteEdicao.setBackground(new java.awt.Color(255, 51, 51));
         btnExcluirClienteEdicao.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluirClienteEdicao.setText("Excluir ");
+        btnExcluirClienteEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirClienteEdicaoActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+        btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(NovoTelefoneCliente)
-                            .addComponent(NovoEnderecoCliente)
-                            .addComponent(NovoNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                            .addComponent(NovoEmailCliente)
-                            .addComponent(NomeClienteEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(NovoTelefoneCliente)
+                                .addComponent(NovoEnderecoCliente)
+                                .addComponent(NovoNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                                .addComponent(NovoEmailCliente))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(NomeClienteEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscarCliente))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(btnSalvarClienteEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(92, 92, 92)
                         .addComponent(btnExcluirClienteEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(167, 167, 167)
                         .addComponent(jLabel1)))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NomeClienteEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomeClienteEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCliente))
+                .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NovoNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,16 +150,120 @@ public class TelaEditarCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NovoTelefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarClienteEdicao)
                     .addComponent(btnExcluirClienteEdicao))
                 .addGap(31, 31, 31))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 537, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void NovoNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoNomeClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NovoNomeClienteActionPerformed
+
+    private void btnSalvarClienteEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteEdicaoActionPerformed
+        // TODO add your handling code here:
+        try{
+            ClienteDAO cDAO = new ClienteDAO();
+            Cliente c = cDAO.buscarPorNome(NomeClienteEditar.getText()).getFirst();
+
+            String nome = NovoNomeCliente.getText();
+            String email = NovoEmailCliente.getText();
+            String endereco = NovoEnderecoCliente.getText();
+            String telefone = NovoTelefoneCliente.getText();
+
+            if(nome == null || nome.isEmpty() || email == null || email.isEmpty() || endereco == null || endereco.isEmpty() || telefone == null || telefone.isEmpty()){
+                JOptionPane.showInternalMessageDialog(null, "Algum dado está vazio\nCliente não salvo");
+            }
+            else{
+                Cliente cliente = new Cliente(c.getId(), nome, email, endereco, telefone, true);
+                cDAO.atualizarCliente(cliente);
+                JOptionPane.showInternalMessageDialog(null, "O cliente " + cliente.getNome() + " foi salvo com sucesso");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "O SEGUINTE ERRO OCORREU: " + e);
+        }
+    }//GEN-LAST:event_btnSalvarClienteEdicaoActionPerformed
+
+    private void btnExcluirClienteEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteEdicaoActionPerformed
+        // TODO add your handling code here:
+        try{
+            ClienteDAO cDAO = new ClienteDAO();
+            if("".equals(NovoNomeCliente.getText()) || "".equals(NovoEmailCliente.getText()) || "".equals(NovoEnderecoCliente.getText()) || "".equals(NovoTelefoneCliente.getText())){
+                JOptionPane.showInternalMessageDialog(null, "Preencha todos os dados corretamente");
+            }
+            else{
+                Cliente cliente = cDAO.buscarPorNome(NovoNomeCliente.getText()).getFirst();
+                    cDAO.deletarCliente(cliente.getId());
+                    JOptionPane.showInternalMessageDialog(null, "Cliente excluido com sucesso");
+                    NovoNomeCliente.setText("");
+                    NovoEmailCliente.setText("");
+                    NovoEnderecoCliente.setText("");
+                    NovoTelefoneCliente.setText("");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+        }
+    }//GEN-LAST:event_btnExcluirClienteEdicaoActionPerformed
+
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        // TODO add your handling code here:
+        try{
+            ClienteDAO cDAO = new ClienteDAO();
+            Cliente cliente = cDAO.buscarPorNome(NomeClienteEditar.getText()).getFirst();
+
+            if(cliente.getId() == 0){
+                JOptionPane.showInternalMessageDialog(null, "Cliente não encontrado");
+                NovoNomeCliente.setText("");
+                NovoEmailCliente.setText("");
+                NovoEnderecoCliente.setText("");
+                NovoTelefoneCliente.setText("");
+            }
+            else{
+                NovoNomeCliente.setText(cliente.getNome());
+                NovoEmailCliente.setText(cliente.getEmail());
+                NovoEnderecoCliente.setText(cliente.getEndereco());
+                NovoTelefoneCliente.setText(cliente.getTelefone());
+            }
+        }
+        catch(java.util.NoSuchElementException e){
+            JOptionPane.showInternalMessageDialog(null, "Cliente não encontrado");
+            NovoNomeCliente.setText("");
+            NovoEmailCliente.setText("");
+            NovoEnderecoCliente.setText("");
+            NovoTelefoneCliente.setText("");
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+            NovoNomeCliente.setText("");
+            NovoEmailCliente.setText("");
+            NovoEnderecoCliente.setText("");
+            NovoTelefoneCliente.setText("");
+        }
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -136,6 +272,7 @@ public class TelaEditarCliente extends javax.swing.JPanel {
     private javax.swing.JTextField NovoEnderecoCliente;
     private javax.swing.JTextField NovoNomeCliente;
     private javax.swing.JTextField NovoTelefoneCliente;
+    private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnExcluirClienteEdicao;
     private javax.swing.JButton btnSalvarClienteEdicao;
     private javax.swing.JLabel jLabel1;
@@ -143,5 +280,6 @@ public class TelaEditarCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

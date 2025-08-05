@@ -115,4 +115,29 @@ public class ClienteDAO {
 
         return cliente;
     }
+
+    public List<Cliente> buscarPorNome(String nome) {
+        List<Cliente> lista = new ArrayList<>();
+        String sql = "SELECT * FROM tbClientes WHERE CLI_NOME = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("CLI_CODIGO"));
+                cliente.setNome(rs.getString("CLI_NOME"));
+                cliente.setEmail(rs.getString("CLI_EMAIL"));
+                cliente.setEndereco(rs.getString("CLI_ENDERECO"));
+                cliente.setTelefone(rs.getString("CLI_TELEFONE"));
+                lista.add(cliente);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar clientes", e);
+        }
+
+        return lista;
+    }
 }
