@@ -1,5 +1,11 @@
 package gui;
 
+import DAO.ClienteDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+import model.Venda;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -17,6 +23,28 @@ public class TelaListarCliente extends javax.swing.JPanel {
     public TelaListarCliente() {
         initComponents();
     }
+    
+    public DefaultTableModel gerarModeloCliente(List<Cliente> clientes) {
+    String[] colunas = {"ID", "Produto", "Quantidade", "Preço"};
+    DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+
+    for (Cliente c : clientes) {
+        Object[] linha = {
+            c.getId(),
+            c.getNome(),
+            c.getEmail(),
+            c.getEndereco(),
+            c.getTelefone()
+        };
+        modelo.addRow(linha);
+    }
+
+    return modelo;
+    }
+    ClienteDAO dao = new ClienteDAO();
+    List<Cliente> clientes = dao.listarClientes();
+
+    DefaultTableModel modelo = gerarModeloCliente(clientes);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,35 +58,7 @@ public class TelaListarCliente extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaCliente = new javax.swing.JTable();
 
-        TabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "NOME", "EMAIL", "ENDEREÇO", "TELEFONE"
-            }
-        ));
+        TabelaCliente.setModel(modelo);
         jScrollPane2.setViewportView(TabelaCliente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
