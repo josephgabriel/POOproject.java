@@ -44,7 +44,7 @@ public class Produto {
     // Método toString sobrescrito para exibir o produto de forma legivel ao user
     @Override
     public String toString() {
-        return String.format("ID: %d | Nome: %s | Preço: R$%.2f | Estoque: %d",
-                             id, nome, preco, estoque);
+        return String.format("ID: %d | Nome: %s | Descrição: %s| Preço: R$%.2f | Estoque: %d",
+                             id, nome, descricao, preco, estoque);
     }
 }
