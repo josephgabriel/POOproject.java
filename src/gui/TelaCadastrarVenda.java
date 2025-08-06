@@ -4,12 +4,31 @@
  */
 package gui;
 
+import DAO.ClienteDAO;
+import DAO.ProdutoDAO;
+import dao.ItemVendaDAO;
+import dao.VendaDAO;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Cliente;
+import model.ItemVenda;
+import model.Produto;
+import model.Venda;
+
 /**
  *
  * @author pc
  */
 public class TelaCadastrarVenda extends javax.swing.JPanel {
 
+    
+    // Variaveis
+    List<ItemVenda> produtos;
+    Cliente cliente;
+    double valor = 0;
     /**
      * Creates new form TelaCadastrarVenda
      */
@@ -37,13 +56,19 @@ public class TelaCadastrarVenda extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         ValorVenda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        SelecionarProduto = new javax.swing.JButton();
+        btnBuscarProduto1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setText("Produto:");
 
         btnSalvarVendaCadastro.setText("Salvar");
+        btnSalvarVendaCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarVendaCadastroActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Cliente:");
 
@@ -53,7 +78,21 @@ public class TelaCadastrarVenda extends javax.swing.JPanel {
 
         jLabel9.setText("Valor Total:");
 
-        jButton1.setText("Selecionar");
+        ValorVenda.setEditable(false);
+
+        SelecionarProduto.setText("Selecionar");
+        SelecionarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelecionarProdutoActionPerformed(evt);
+            }
+        });
+
+        btnBuscarProduto1.setText("Buscar");
+        btnBuscarProduto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProduto1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,23 +104,28 @@ public class TelaCadastrarVenda extends javax.swing.JPanel {
                         .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(NomeProdutoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NomeClienteVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(NomeClienteVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(DataVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7))
+                                        .addComponent(jLabel2)
+                                        .addComponent(NomeProdutoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(QtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel8))))
+                                        .addComponent(jLabel8)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(SelecionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(182, 182, 182)
+                                    .addComponent(btnBuscarProduto1)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7))
                                 .addGap(18, 18, 18)
-                                .addComponent(ValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ValorVenda, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(DataVenda)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(btnSalvarVendaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -91,24 +135,28 @@ public class TelaCadastrarVenda extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NomeProdutoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NomeProdutoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(QtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SelecionarProduto)
+                    .addComponent(btnBuscarProduto1))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NomeClienteVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(QtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addComponent(jLabel7))
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
@@ -118,15 +166,125 @@ public class TelaCadastrarVenda extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProduto1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            ProdutoDAO pDAO = new ProdutoDAO();
+            Produto produto = pDAO.buscarPorNome(NomeProdutoVenda.getText()).getFirst();
+
+            if(produto.getId() == 0){
+                JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+                NomeProdutoVenda.setText(null);
+            }
+            else{
+                //Mostra o total de produtos na aba de quantidade
+                QtdVenda.setText("" + produto.getEstoque());
+            }
+        }
+        catch(java.lang.NullPointerException e){
+            JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+        }
+        catch(java.util.NoSuchElementException e){
+            JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+        }
+    }//GEN-LAST:event_btnBuscarProduto1ActionPerformed
+
+    private void SelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecionarProdutoActionPerformed
+        try{
+            ProdutoDAO pDAO = new ProdutoDAO();
+            Produto produto = pDAO.buscarPorNome(NomeProdutoVenda.getText()).getFirst();
+            ItemVenda itemVenda = new ItemVenda();
+
+            if(produto.getId() == 0 || Integer.parseInt(QtdVenda.getText()) < 1){
+                JOptionPane.showInternalMessageDialog(null, "Produto não encontrado ou com estoque menor que 1");
+                NomeProdutoVenda.setText(null);
+            }
+            else{
+                if(Integer.parseInt(QtdVenda.getText()) > produto.getEstoque()){
+                    JOptionPane.showInternalMessageDialog(null, "Quantidade em estoque insuficiente");
+                    QtdVenda.setText(null);
+                }
+                else{
+                    itemVenda.setProduto(produto);
+                    itemVenda.setQuantidade(Integer.parseInt(QtdVenda.getText()));
+                    itemVenda.setPrecoUnitario(produto.getPreco());
+                    produtos.add(itemVenda);
+                    JOptionPane.showInternalMessageDialog(null, produto.getNome() + " foi adicionado ao pedido");
+
+                    // Alteração no valor total da venda
+                    valor += produto.getPreco() * itemVenda.getQuantidade();
+                    ValorVenda.setText("" + valor);
+                }
+            }
+        }
+        catch(java.lang.NullPointerException e){
+            JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+        }
+        catch(java.util.NoSuchElementException e){
+            JOptionPane.showInternalMessageDialog(null, "Produto não encontrado");
+
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+        }
+    }//GEN-LAST:event_SelecionarProdutoActionPerformed
+
+    private void btnSalvarVendaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarVendaCadastroActionPerformed
+        // TODO add your handling code here:
+        try {Venda venda = new Venda();
+            ClienteDAO cDAO = new ClienteDAO();
+            VendaDAO vDAO = new VendaDAO();
+            ItemVendaDAO ivDAO = new ItemVendaDAO();
+            
+            // DATA DA VENDA
+            try{
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                Date data = formato.parse(DataVenda.getText());
+            
+                // CLIENTE DA VENDA
+                cliente = cDAO.buscarPorNome(NomeClienteVenda.getText()).getFirst();
+                if(cliente.getId() == 0){
+                    JOptionPane.showInternalMessageDialog(null, "Cliente não encontrado");
+                    NomeClienteVenda.setText(null);
+                }
+                // SALVAR A VENDA
+                else{
+                    venda.setCliente(cliente);
+                    Timestamp timestamp = new Timestamp(data.getTime());
+                    venda.setDataVenda(timestamp);
+                    vDAO.salvarVenda(venda);
+                    venda = vDAO.listarUltimaVenda();
+                    
+                    for(ItemVenda item : produtos){
+                        item.setVenda(venda);
+                        ivDAO.salvar(item);
+                    }
+                }
+            }
+            catch(Exception e){
+                JOptionPane.showInternalMessageDialog(null, "Formato da data foi invalido");
+                DataVenda.setText(null);
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showInternalMessageDialog(null, "OCORREU UM ERRO: " + e);
+        }
+    }//GEN-LAST:event_btnSalvarVendaCadastroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DataVenda;
     private javax.swing.JTextField NomeClienteVenda;
     private javax.swing.JTextField NomeProdutoVenda;
     private javax.swing.JTextField QtdVenda;
+    private javax.swing.JButton SelecionarProduto;
     private javax.swing.JTextField ValorVenda;
+    private javax.swing.JButton btnBuscarProduto1;
     private javax.swing.JButton btnSalvarVendaCadastro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
