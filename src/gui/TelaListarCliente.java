@@ -25,7 +25,7 @@ public class TelaListarCliente extends javax.swing.JPanel {
     }
     
     public DefaultTableModel gerarModeloCliente(List<Cliente> clientes) {
-    String[] colunas = {"ID", "Produto", "Quantidade", "Preço"};
+    String[] colunas = {"ID", "Nome", "Email", "Endereco", "Telefone"};
     DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
     for (Cliente c : clientes) {

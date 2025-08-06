@@ -4,6 +4,11 @@
  */
 package gui;
 
+import dao.VendaDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Venda;
+
 /**
  *
  * @author pc
@@ -17,6 +22,27 @@ public class TelaHistoricoVenda extends javax.swing.JPanel {
         initComponents();
     }
 
+    public DefaultTableModel gerarModeloVenda(List<Venda> vendas) {
+    String[] colunas = {"ID", "Cliente","Data", "Itens", "Total"};
+    DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+
+    for (Venda v : vendas) {
+        Object[] linha = {
+            v.getId(),
+            v.getCliente().getNome(),
+            v.getDataVenda(),
+            v.getItens(),
+            v.getValorTotal()
+        };
+        modelo.addRow(linha);
+    }
+
+    return modelo;
+    }
+    VendaDAO dao = new VendaDAO();
+    List<Venda> vendas = dao.listarVendasCompletas();
+
+    DefaultTableModel modelo = gerarModeloVenda(vendas);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,35 +55,7 @@ public class TelaHistoricoVenda extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaHistorico = new javax.swing.JTable();
 
-        TabelaHistorico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "CLIENTE", "DATA", "PRODUTOS", "QUANTIDADE", "VALOR TOTAL"
-            }
-        ));
+        TabelaHistorico.setModel(modelo);
         jScrollPane2.setViewportView(TabelaHistorico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

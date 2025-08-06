@@ -24,7 +24,7 @@ public class TelaListarProduto extends javax.swing.JPanel {
     }
 
     public DefaultTableModel gerarModeloProduto(List<Produto> produtos) {
-    String[] colunas = {"ID", "Produto", "Quantidade", "Preço"};
+    String[] colunas = {"ID", "Nome","Descricao", "Preço", "Quantidade"};
     DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
     for (Produto p : produtos) {
