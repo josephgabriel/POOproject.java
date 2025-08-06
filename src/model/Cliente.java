@@ -1,6 +1,6 @@
 package model;
 
-public class Cliente { //Arrumei a classe cliente para ser Condizente com o DAO
+public class Cliente {
     private int id;
     private String nome;
     private String email;

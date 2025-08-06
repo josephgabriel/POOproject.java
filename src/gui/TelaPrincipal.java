@@ -145,7 +145,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnProduto = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnVendas = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         PainelTelas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -181,9 +180,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        // jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-
         javax.swing.GroupLayout PainelMenuLayout = new javax.swing.GroupLayout(PainelMenu);
         PainelMenu.setLayout(PainelMenuLayout);
         PainelMenuLayout.setHorizontalGroup(
@@ -191,8 +187,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(PainelMenuLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(PainelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(51, Short.MAX_VALUE))
@@ -200,9 +195,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         PainelMenuLayout.setVerticalGroup(
             PainelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelMenuLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addGap(227, 227, 227)
                 .addComponent(btnProduto)
                 .addGap(51, 51, 51)
                 .addComponent(btnCliente)
@@ -277,6 +270,5 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnVendas;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

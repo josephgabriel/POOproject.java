@@ -102,7 +102,6 @@ public class VendaDAO extends ConexaoBD {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                // ainda falta os gettes e settes da classe cliente
                 Cliente cliente = new Cliente();
                 cliente.setId(rs.getInt("CLI_CODIGO"));
                 cliente.setNome(rs.getString("CLI_NOME"));
