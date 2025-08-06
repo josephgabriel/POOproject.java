@@ -10,14 +10,15 @@ public class ProdutoDAO extends ConexaoBD {
     
     // Inserir novo produto
     public void inserir(Produto produto) {
-        String sql = "INSERT INTO tbProdutos (nome, preco, estoque) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tbProdutos (PRO_NOME, PRO_DESCRICAO, PRO_PRECO, PRO_ESTOQUE) VALUES (?, ? , ?, ?)";
 
         try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNome());
-            stmt.setDouble(2, produto.getPreco());
-            stmt.setInt(3, produto.getEstoque());
+            stmt.setString(2, produto.getDescricao());
+            stmt.setDouble(3, produto.getPreco());
+            stmt.setInt(4, produto.getEstoque());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -27,15 +28,16 @@ public class ProdutoDAO extends ConexaoBD {
 
     // Atualizar produto existente
     public void atualizar(Produto produto) {
-        String sql = "UPDATE tbProdutos SET nome = ?, preco = ?, estoque = ? WHERE id = ?";
+        String sql = "UPDATE tbProdutos SET PRO_NOME = ?, PRO_DESCRICAO = ?, PRO_PRECO = ?, PRO_ESTOQUE = ? WHERE PRO_CODIGO = ?";
 
         try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNome());
-            stmt.setDouble(2, produto.getPreco());
-            stmt.setInt(3, produto.getEstoque());
-            stmt.setInt(4, produto.getId());
+            stmt.setString(2, produto.getDescricao());
+            stmt.setDouble(3, produto.getPreco());
+            stmt.setInt(4, produto.getEstoque());
+            stmt.setInt(5, produto.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -45,7 +47,7 @@ public class ProdutoDAO extends ConexaoBD {
 
     // Deletar produto por ID
     public void deletar(int id) {
-        String sql = "DELETE FROM tbProdutos WHERE id = ?";
+        String sql = "DELETE FROM tbProdutos WHERE PRO_CODIGO = ?";
 
         try (Connection conn = ConexaoBD.createConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -60,7 +62,7 @@ public class ProdutoDAO extends ConexaoBD {
 
     // Buscar produto por ID
     public Produto buscarPorId(int id) {
-        String sql = "SELECT * FROM tbProdutos WHERE id = ?";
+        String sql = "SELECT * FROM tbProdutos WHERE PRO_CODIGO = ?";
         Produto produto = null;
 
         try (Connection conn = ConexaoBD.createConnection();
@@ -71,11 +73,11 @@ public class ProdutoDAO extends ConexaoBD {
 
             if (rs.next()) {
                 produto = new Produto(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("descricao"),
-                    rs.getDouble("preco"),
-                    rs.getInt("estoque")
+                    rs.getInt("PRO_CODIGO"),
+                    rs.getString("PRO_NOME"),
+                    rs.getString("PRO_DESCRICAO"),
+                    rs.getDouble("PRO_PRECO"),
+                    rs.getInt("PRO_ESTOQUE")
                 );
             }
 
@@ -97,11 +99,11 @@ public class ProdutoDAO extends ConexaoBD {
 
             while (rs.next()) {
                 Produto p = new Produto(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("descricao"),
-                    rs.getDouble("preco"),
-                    rs.getInt("estoque")
+                    rs.getInt("PRO_CODIGO"),
+                    rs.getString("PRO_NOME"),
+                    rs.getString("PRO_DESCRICAO"),
+                    rs.getDouble("PRO_PRECO"),
+                    rs.getInt("PRO_ESTOQUE")
                 );
                 produtos.add(p);
             }
@@ -123,7 +125,7 @@ public class ProdutoDAO extends ConexaoBD {
 
             while (rs.next()) {
                 Produto produto = new Produto();
-                produto.setId(rs.getInt("PRO_ID"));
+                produto.setId(rs.getInt("PRO_CODIGO"));
                 produto.setNome(rs.getString("PRO_NOME"));
                 produto.setDescricao(rs.getString("PRO_DESCRICAO"));
                 produto.setPreco(rs.getDouble("PRO_PRECO"));
