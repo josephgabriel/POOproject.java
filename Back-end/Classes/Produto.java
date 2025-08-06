@@ -9,9 +9,10 @@ public class Produto {
 
 
     // inicializar os atributos ao criar um novo produto
-    public Produto(int id, String nome, double preco, int estoque) {
+    public Produto(int id, String nome, String descricao, double preco, int estoque){
         this.id = id;
         this.nome = nome;
+        this.descricao = descricao;
         this.preco = preco;
         this.estoque = estoque;
     }
