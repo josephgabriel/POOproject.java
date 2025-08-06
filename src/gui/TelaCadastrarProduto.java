@@ -151,7 +151,7 @@ public class TelaCadastrarProduto extends javax.swing.JPanel {
                     JOptionPane.showInternalMessageDialog(null, "Algum dado está vazio ou é invalido\nProduto não salvo");
                 }
                 else{
-                    Produto produto = new Produto(0, nome, descricao, preco, estoque);
+                    Produto produto = new Produto(nome, descricao, preco, estoque);
                     produtoDAO.inserir(produto);
                     JOptionPane.showInternalMessageDialog(null, "O produto " + produto.getNome() + " foi salvo com sucesso");
                 }

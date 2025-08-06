@@ -18,6 +18,13 @@ public class Produto {
         this.estoque = estoque;
     }
     
+    public Produto(String nome, String descricao, double preco, int estoque) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.estoque = estoque;
+    }
+    
     public Produto() {}
 
     // leitura dos atributos com get
