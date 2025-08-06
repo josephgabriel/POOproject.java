@@ -1,5 +1,10 @@
 package gui;
 
+import DAO.ProdutoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Produto;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -18,6 +23,27 @@ public class TelaListarProduto extends javax.swing.JPanel {
         initComponents();
     }
 
+    public DefaultTableModel gerarModeloProduto(List<Produto> produtos) {
+    String[] colunas = {"ID", "Produto", "Quantidade", "Preço"};
+    DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+
+    for (Produto p : produtos) {
+        Object[] linha = {
+            p.getId(),
+            p.getNome(),
+            p.getDescricao(),
+            p.getPreco(),
+            p.getEstoque()
+        };
+        modelo.addRow(linha);
+    }
+
+    return modelo;
+    }
+    ProdutoDAO dao = new ProdutoDAO();
+    List<Produto> produtos = dao.listarTodos();
+
+    DefaultTableModel modelo = gerarModeloProduto(produtos);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,35 +56,7 @@ public class TelaListarProduto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaProdutos = new javax.swing.JTable();
 
-        TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "NOME", "DESCRIÇÃO", "PREÇO", "ESTOQUE"
-            }
-        ));
+        TabelaProdutos.setModel(modelo);
         jScrollPane1.setViewportView(TabelaProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
