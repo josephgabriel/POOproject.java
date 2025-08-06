@@ -9,7 +9,7 @@ public class ProdutoDAO extends ConexãoBD {
     
     // Inserir novo produto
     public void inserir(Produto produto) {
-        String sql = "INSERT INTO tbProdutos (nome, preco, estoque) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tbProdutos (PRO_NOME, PRO_DESCRICAO, PRO_PRECO, PRO_ESTOQUE) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
