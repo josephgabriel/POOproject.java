@@ -3,9 +3,9 @@ import java.util.List;
 public class ProdutoGerenciador {
     private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    // Inserir novo produto
-    public void inserirProduto(String nome, double preco, int estoque) {
-        Produto novo = new Produto(0, nome, preco, estoque); // ID será gerado no banco
+    // Inserir novo produto (agora com descrição)
+    public void inserirProduto(String nome, String descricao, double preco, int estoque) {
+        Produto novo = new Produto(0, nome, descricao, preco, estoque); // ID será gerado no banco
         produtoDAO.inserir(novo);
         System.out.println("Produto inserido com sucesso no banco!");
     }
@@ -23,10 +23,11 @@ public class ProdutoGerenciador {
     }
 
     // Atualizar produto
-    public void atualizarProduto(int id, String novoNome, double novoPreco, int novoEstoque) {
+    public void atualizarProduto(int id, String novoNome, String novaDescricao, double novoPreco, int novoEstoque) {
         Produto produto = produtoDAO.buscarPorId(id);
         if (produto != null) {
             produto.setNome(novoNome);
+            produto.setDescricao(novaDescricao);
             produto.setPreco(novoPreco);
             produto.setEstoque(novoEstoque);
             produtoDAO.atualizar(produto);
