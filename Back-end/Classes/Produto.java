@@ -5,6 +5,8 @@ public class Produto {
     private String nome;
     private double preco;
     private int estoque;
+    private String descricao;
+
 
     // inicializar os atributos ao criar um novo produto
     public Produto(int id, String nome, double preco, int estoque) {
